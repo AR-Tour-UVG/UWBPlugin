@@ -6,11 +6,51 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E90A66432DC1F9CF0066DD8F /* EstimoteUWB.xcframework in Embeded Frameworks */ = {isa = PBXBuildFile; fileRef = E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E9127FEE2DC1791A003BE04A /* EstimoteUWB.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */; };
+		E9127FEF2DC1792B003BE04A /* EstimoteUWB.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E90A66422DC1F9B60066DD8F /* Embeded Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E90A66432DC1F9CF0066DD8F /* EstimoteUWB.xcframework in Embeded Frameworks */,
+			);
+			name = "Embeded Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9127FE32DC1748C003BE04A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E9127FEF2DC1792B003BE04A /* EstimoteUWB.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		E90A662E2DC1F7220066DD8F /* UWBTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UWBTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = EstimoteUWB.xcframework; sourceTree = "<group>"; };
 		E92337F12DBEC7C100FE504E /* UWBplugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UWBplugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E90A66512DC25F660066DD8F /* Exceptions for "UWBTestApp" folder in "UWBTestApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E90A662D2DC1F7220066DD8F /* UWBTestApp */;
+		};
 		E92337F62DBEC7C100FE504E /* Exceptions for "UWBplugin" folder in "UWBplugin" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			publicHeaders = (
@@ -21,6 +61,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		E90A662F2DC1F7220066DD8F /* UWBTestApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E90A66512DC25F660066DD8F /* Exceptions for "UWBTestApp" folder in "UWBTestApp" target */,
+			);
+			path = UWBTestApp;
+			sourceTree = "<group>";
+		};
 		E92337F32DBEC7C100FE504E /* UWBplugin */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,21 +80,39 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E92337EE2DBEC7C100FE504E /* Frameworks */ = {
+		E90A662B2DC1F7220066DD8F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E92337EE2DBEC7C100FE504E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9127FEE2DC1791A003BE04A /* EstimoteUWB.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E0EC30C56010DB91EF831F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E92337E72DBEC7C100FE504E = {
 			isa = PBXGroup;
 			children = (
 				E92337F32DBEC7C100FE504E /* UWBplugin */,
+				E90A662F2DC1F7220066DD8F /* UWBTestApp */,
 				E92337F22DBEC7C100FE504E /* Products */,
+				8E0EC30C56010DB91EF831F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				E92337F12DBEC7C100FE504E /* UWBplugin.framework */,
+				E90A662E2DC1F7220066DD8F /* UWBTestApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,6 +138,29 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		E90A662D2DC1F7220066DD8F /* UWBTestApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E90A663B2DC1F7230066DD8F /* Build configuration list for PBXNativeTarget "UWBTestApp" */;
+			buildPhases = (
+				E90A662A2DC1F7220066DD8F /* Sources */,
+				E90A662B2DC1F7220066DD8F /* Frameworks */,
+				E90A662C2DC1F7220066DD8F /* Resources */,
+				E90A66422DC1F9B60066DD8F /* Embeded Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E90A662F2DC1F7220066DD8F /* UWBTestApp */,
+			);
+			name = UWBTestApp;
+			packageProductDependencies = (
+			);
+			productName = UWBTestApp;
+			productReference = E90A662E2DC1F7220066DD8F /* UWBTestApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E92337F02DBEC7C100FE504E /* UWBplugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E92337F72DBEC7C100FE504E /* Build configuration list for PBXNativeTarget "UWBplugin" */;
@@ -79,6 +169,7 @@
 				E92337ED2DBEC7C100FE504E /* Sources */,
 				E92337EE2DBEC7C100FE504E /* Frameworks */,
 				E92337EF2DBEC7C100FE504E /* Resources */,
+				E9127FE32DC1748C003BE04A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -88,8 +179,6 @@
 				E92337F32DBEC7C100FE504E /* UWBplugin */,
 			);
 			name = UWBplugin;
-			packageProductDependencies = (
-			);
 			productName = UWBplugin;
 			productReference = E92337F12DBEC7C100FE504E /* UWBplugin.framework */;
 			productType = "com.apple.product-type.framework";
@@ -101,10 +190,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					E90A662D2DC1F7220066DD8F = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					E92337F02DBEC7C100FE504E = {
 						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -123,11 +217,19 @@
 			projectRoot = "";
 			targets = (
 				E92337F02DBEC7C100FE504E /* UWBplugin */,
+				E90A662D2DC1F7220066DD8F /* UWBTestApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E90A662C2DC1F7220066DD8F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E92337EF2DBEC7C100FE504E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -138,6 +240,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E90A662A2DC1F7220066DD8F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E92337ED2DBEC7C100FE504E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,10 +257,79 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		E90A66392DC1F7230066DD8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UWBTestApp/Preview Content\"";
+				DEVELOPMENT_TEAM = H9XPAYGRWN;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_FILE[sdk=*]" = UWBTestApp/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Turn on to allow \"Estimote UWB\" to connect to accessories.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "camera is utlizied for arkit to give user horizontal and vertical info";
+				INFOPLIST_KEY_NSNearbyInteractionAllowOnceUsageDescription = "Turn on to allow \"Estimote UWB\" to connect to accessories.";
+				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = "Turn on to allow \"Estimote UWB\" to connect to accessories.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = UVG.UWBTestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E90A663A2DC1F7230066DD8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UWBTestApp/Preview Content\"";
+				DEVELOPMENT_TEAM = H9XPAYGRWN;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_FILE[sdk=*]" = UWBTestApp/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Turn on to allow \"Estimote UWB\" to connect to accessories.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "camera is utlizied for arkit to give user horizontal and vertical info";
+				INFOPLIST_KEY_NSNearbyInteractionAllowOnceUsageDescription = "Turn on to allow \"Estimote UWB\" to connect to accessories.";
+				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = "Turn on to allow \"Estimote UWB\" to connect to accessories.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = UVG.UWBTestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E92337F82DBEC7C100FE504E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -176,7 +354,8 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -185,6 +364,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -209,7 +389,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -342,6 +522,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E90A663B2DC1F7230066DD8F /* Build configuration list for PBXNativeTarget "UWBTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E90A66392DC1F7230066DD8F /* Debug */,
+				E90A663A2DC1F7230066DD8F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E92337EB2DBEC7C100FE504E /* Build configuration list for PBXProject "UWBplugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
