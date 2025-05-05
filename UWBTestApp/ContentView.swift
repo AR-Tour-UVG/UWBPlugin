@@ -38,6 +38,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 class EstimoteUWBManagerExample: NSObject, ObservableObject {
+    private var connNumber : Int = 3
     private var uwbManager: EstimoteUWBManager?
     private var objectiveDevice: UWBIdentifiable?
     @Published public var distances = Dictionary<String, Float>(minimumCapacity: 3)
@@ -45,6 +46,14 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
     override init() {
         super.init()
         setupUWB()
+    }
+    
+    func updateDistances(key: String, value: Float){
+        if self.distances.keys.contains(key){
+            self.distances[key] = value
+        }else if self.distances.count < self.connNumber {
+            self.distances[key] = value
+        }
     }
 
     private func setupUWB() {
@@ -67,7 +76,7 @@ extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
     // OPTIONAL
     func didDiscover(device: UWBIdentifiable, with rssi: NSNumber, from manager: EstimoteUWBManager) {
         // there is a connection
-        if !self.distances.keys.contains(device.publicIdentifier){
+        if !self.distances.keys.contains(device.publicIdentifier) && self.distances.count < self.connNumber{
             self.distances[device.publicIdentifier] = 0
             manager.connect(to: device.publicIdentifier)
         }else{
