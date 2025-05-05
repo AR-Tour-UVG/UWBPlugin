@@ -8,11 +8,26 @@ import SwiftUI
 import EstimoteUWB
 
 struct ContentView: View {
-    let uwb = EstimoteUWBManagerExample()
+    @ObservedObject var uwb = EstimoteUWBManagerExample()
     
     var body: some View {
-        Text("Estimote UWB")
-            .padding()
+        VStack {
+            Text("Estimote UWB")
+                .font(.title)
+                .padding()
+
+            if !uwb.distances.isEmpty {
+                ForEach(Array(uwb.distances), id: \.key) { key, value in
+                        Text(String(format: "Device %@: %.2f meters", key, value))
+                            .font(.headline)
+                            .padding()
+                }
+            } else {
+                Text("No devices connected")
+                    .foregroundColor(.gray)
+                    .padding()
+            }
+        }
     }
 }
 
@@ -25,7 +40,8 @@ struct ContentView_Previews: PreviewProvider {
 class EstimoteUWBManagerExample: NSObject, ObservableObject {
     private var uwbManager: EstimoteUWBManager?
     private var objectiveDevice: UWBIdentifiable?
-
+    @Published public var distances = Dictionary<String, Float>(minimumCapacity: 3)
+    
     override init() {
         super.init()
         setupUWB()
@@ -43,18 +59,19 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
 extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
     func didUpdatePosition(for device: EstimoteUWBDevice) {
         print("Update possition for \(device.publicIdentifier) at distance: \(device.distance)")
+        DispatchQueue.main.async {
+            self.distances[device.publicIdentifier] = device.distance  // 👈 Update here
+        }
     }
     
     // OPTIONAL
     func didDiscover(device: UWBIdentifiable, with rssi: NSNumber, from manager: EstimoteUWBManager) {
         // there is a connection
-        if let objectiveDevice = self.objectiveDevice{
-            print("Already connected to \(objectiveDevice), devide \(device) tried to connect")
-        // there is not a connection yet
+        if !self.distances.keys.contains(device.publicIdentifier){
+            self.distances[device.publicIdentifier] = 0
+            manager.connect(to: device.publicIdentifier)
         }else{
-            self.objectiveDevice = device
-            print("Connecting to \(device.publicIdentifier)")
-            self.uwbManager?.connect(to: device)
+            print("Already connected to \(device.publicIdentifier)")
         }
     }
     
