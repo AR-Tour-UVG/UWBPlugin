@@ -109,6 +109,5 @@ extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
     // OPTIONAL
     func didFailToConnect(to device: UWBIdentifiable, error: Error?) {
         print("Could not connect to: \(device.publicIdentifier)")
-    }
-    
+    }    
 }
