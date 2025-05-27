@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E9A808922DE0085600AAA0C1 /* EstimoteUWB.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */; };
 		E9A808932DE0086F00AAA0C1 /* EstimoteUWB.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */; };
 		E9A808942DE0086F00AAA0C1 /* EstimoteUWB.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9A809062DE5A44500AAA0C1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E9A809052DE5A43E00AAA0C1 /* README.md */; };
+		E9A8099D2DE5A8F400AAA0C1 /* EstimoteUWB.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */; };
+		E9A8099E2DE5A8F400AAA0C1 /* EstimoteUWB.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -20,6 +21,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E9A8099E2DE5A8F400AAA0C1 /* EstimoteUWB.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9A808922DE0085600AAA0C1 /* EstimoteUWB.xcframework in Frameworks */,
+				E9A8099D2DE5A8F400AAA0C1 /* EstimoteUWB.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,9 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
     private var distances = Dictionary<String, Distances>(minimumCapacity: 3)
     private var trilateration: Trilateration
     
+    // computed information
+    private var coords: Coordinate = Coordinate(x:0,y:0,z:0)
+    
     override init() {
         let json_map = MapReader.readCoordinates(from: "casa.json")
         self.trilateration = Trilateration(map: json_map)
@@ -25,6 +28,10 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
         super.init()
         self.setupUWB()
         self.timeoutObserver()
+    }
+    
+    public func getCoords() -> Coordinate{
+        return self.coords
     }
     
     private func timeoutObserver(){
@@ -65,6 +72,7 @@ extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
         self.distances[device.publicIdentifier] = Distances(distance: device.distance, timestamp: Date().timeIntervalSince1970)
         let top3 = self.trilateration.pickCoordinates(distances: self.distances)
         let coord: Coordinate = self.trilateration.tirlaterate(top3Distances: top3)
+        self.coords = coord
         print("Estimated Position: \(coord)")
     }
     
