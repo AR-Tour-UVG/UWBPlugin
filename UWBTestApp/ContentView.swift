@@ -18,7 +18,7 @@ struct ContentView: View {
 
             if !uwb.distances.isEmpty {
                 ForEach(Array(uwb.distances), id: \.key) { key, value in
-                        Text(String(format: "Device %@: %.2f meters", key, value))
+                    Text(String(format: "Device %@: %.2f meters", key, value.distance))
                             .font(.headline)
                             .padding()
                 }
@@ -38,21 +38,50 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 class EstimoteUWBManagerExample: NSObject, ObservableObject {
-    private var connNumber : Int = 3
+    private var connNumber : Int = 5
     private var uwbManager: EstimoteUWBManager?
     private var objectiveDevice: UWBIdentifiable?
-    @Published public var distances = Dictionary<String, Float>(minimumCapacity: 3)
+    private var timeToLive: Double = 10.0
+    @Published public var distances = Dictionary<String, (distance: Float, timestamp: TimeInterval)>(minimumCapacity: 3)
     
     override init() {
         super.init()
+        
+        let json_map = MapReader.readCoordinates(from: "casa.json")
+            
+        
+                
+        
         setupUWB()
+        self.timeoutObserver()
+    }
+    
+    private func timeoutObserver(){
+        // Start a timer on a background queue
+        DispatchQueue.global(qos: .background).async {
+            while true {
+                let currentTime = Date().timeIntervalSince1970
+                
+                DispatchQueue.main.async {
+                    for (deviceID, (_, timestamp)) in self.distances {
+                        if currentTime - timestamp > self.timeToLive {
+                            self.uwbManager?.disconnect(from: deviceID)
+                            self.distances.removeValue(forKey: deviceID)
+                        }
+                    }
+                }
+                
+                // Sleep to avoid busy loop
+                Thread.sleep(forTimeInterval: 1.0)
+            }
+        }
     }
     
     func updateDistances(key: String, value: Float){
         if self.distances.keys.contains(key){
-            self.distances[key] = value
+            self.distances[key] = (distance: value, timestamp: Date().timeIntervalSince1970)
         }else if self.distances.count < self.connNumber {
-            self.distances[key] = value
+            self.distances[key] = (distance: value, timestamp: Date().timeIntervalSince1970)
         }
     }
 
@@ -61,15 +90,17 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
                                         options: EstimoteUWBOptions(shouldHandleConnectivity: false,
                                                                     isCameraAssisted: false))
         uwbManager?.startScanning()
+        
+       
     }
 }
 
 // REQUIRED PROTOCOL
 extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
     func didUpdatePosition(for device: EstimoteUWBDevice) {
-        print("Update possition for \(device.publicIdentifier) at distance: \(device.distance)")
+        print("Update possition at distance: \(device)")
         DispatchQueue.main.async {
-            self.distances[device.publicIdentifier] = device.distance  // 👈 Update here
+            self.distances[device.publicIdentifier] = (distance: device.distance, timestamp: Date().timeIntervalSince1970)
         }
     }
     
@@ -77,10 +108,15 @@ extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
     func didDiscover(device: UWBIdentifiable, with rssi: NSNumber, from manager: EstimoteUWBManager) {
         // there is a connection
         if !self.distances.keys.contains(device.publicIdentifier) && self.distances.count < self.connNumber{
-            self.distances[device.publicIdentifier] = 0
+            self.distances[device.publicIdentifier] = (distance: 0, timestamp: Date().timeIntervalSince1970)
             manager.connect(to: device.publicIdentifier)
+            
+        }else if self.distances.count >= self.connNumber{
+            print("\(device.publicIdentifier) conn failed because it exceeds the connection limit. ")
+        }else if self.distances.keys.contains(device.publicIdentifier){
+            print("\(device.publicIdentifier) conn failed because it is already connected. ")
         }else{
-            print("Already connected to \(device.publicIdentifier)")
+            print("\(device.publicIdentifier): WTF???? \n \(self.distances)")
         }
     }
     
@@ -91,16 +127,14 @@ extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
     
     // OPTIONAL
     func didDisconnect(from device: UWBIdentifiable, error: Error?) {
-        
+        DispatchQueue.main.async {
+            self.distances[device.publicIdentifier] = nil
+        }
     }
     
     // OPTIONAL
     func didFailToConnect(to device: UWBIdentifiable, error: Error?) {
         print("Could not connect to: \(device.publicIdentifier)")
     }
-
-    // OPTIONAL PROTOCOL FOR BEACON BLE RANGING
-//    func didRange(for beacon: EstimoteBLEDevice) {
-//        print("Beacon did range: \(beacon)")
-//    }
+    
 }

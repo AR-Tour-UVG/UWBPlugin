@@ -7,30 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E90A66432DC1F9CF0066DD8F /* EstimoteUWB.xcframework in Embeded Frameworks */ = {isa = PBXBuildFile; fileRef = E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E9127FEE2DC1791A003BE04A /* EstimoteUWB.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */; };
-		E9127FEF2DC1792B003BE04A /* EstimoteUWB.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E9A808922DE0085600AAA0C1 /* EstimoteUWB.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */; };
+		E9A808932DE0086F00AAA0C1 /* EstimoteUWB.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */; };
+		E9A808942DE0086F00AAA0C1 /* EstimoteUWB.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E90A66422DC1F9B60066DD8F /* Embeded Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				E90A66432DC1F9CF0066DD8F /* EstimoteUWB.xcframework in Embeded Frameworks */,
-			);
-			name = "Embeded Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E9127FE32DC1748C003BE04A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E9127FEF2DC1792B003BE04A /* EstimoteUWB.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9A808952DE0086F00AAA0C1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E9A808942DE0086F00AAA0C1 /* EstimoteUWB.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -39,8 +38,8 @@
 
 /* Begin PBXFileReference section */
 		E90A662E2DC1F7220066DD8F /* UWBTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UWBTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = EstimoteUWB.xcframework; sourceTree = "<group>"; };
 		E92337F12DBEC7C100FE504E /* UWBplugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UWBplugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = EstimoteUWB.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -84,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9A808932DE0086F00AAA0C1 /* EstimoteUWB.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9127FEE2DC1791A003BE04A /* EstimoteUWB.xcframework in Frameworks */,
+				E9A808922DE0085600AAA0C1 /* EstimoteUWB.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +101,7 @@
 		8E0EC30C56010DB91EF831F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E9127FED2DC1791A003BE04A /* EstimoteUWB.xcframework */,
+				E9A808902DE0085600AAA0C1 /* EstimoteUWB.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,7 +145,7 @@
 				E90A662A2DC1F7220066DD8F /* Sources */,
 				E90A662B2DC1F7220066DD8F /* Frameworks */,
 				E90A662C2DC1F7220066DD8F /* Resources */,
-				E90A66422DC1F9B60066DD8F /* Embeded Frameworks */,
+				E9A808952DE0086F00AAA0C1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
