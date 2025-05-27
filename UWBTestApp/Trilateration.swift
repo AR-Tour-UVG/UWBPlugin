@@ -22,35 +22,36 @@ class Trilateration{
         return Array(top3)
     }
     
-    public func tirlaterate(top3Distances: Array<(key: String, value: Distances)>) -> [(Double, Coordinate)]{
+    public func tirlaterate(top3Distances: Array<(key: String, value: Distances)>) -> Coordinate{
         // Preallocate array of capacity 3 (empty but optimized for 3 elements)
-        var result = [ (Double, Coordinate) ]()
-        result.reserveCapacity(3)
+        var distance_point_pairs = [ (Float, Coordinate) ]()
+        distance_point_pairs.reserveCapacity(3)
         
         for (key, distance) in top3Distances {
             if let coord = map[key] {
-                result.append((distance.distance, coord))
+                distance_point_pairs.append((distance.distance, coord))
             }
         }
         
+        let result: Coordinate = self.tirlaterate_3D(distance_coord: distance_point_pairs)
         return result
     }
     
-    private func tirlaterate_3D(distance_coord: [(Double, Coordinate)]) -> Coordinate{
-        let d1: Double = distance_coord[0].0
-        let x1: Double = distance_coord[0].1.x
-        let y1: Double = distance_coord[0].1.y
-        let z1: Double = distance_coord[0].1.z
+    private func tirlaterate_3D(distance_coord: [(Float, Coordinate)]) -> Coordinate{
+        let d1: Float = distance_coord[0].0
+        let x1: Float = distance_coord[0].1.x
+        let y1: Float = distance_coord[0].1.y
+        let z1: Float = distance_coord[0].1.z
         
-        let d2: Double = distance_coord[1].0
-        let x2: Double = distance_coord[1].1.x
-        let y2: Double = distance_coord[1].1.y
-        let z2: Double = distance_coord[1].1.z
+        let d2: Float = distance_coord[1].0
+        let x2: Float = distance_coord[1].1.x
+        let y2: Float = distance_coord[1].1.y
+        let z2: Float = distance_coord[1].1.z
         
-        let d3: Double = distance_coord[2].0
-        let x3: Double = distance_coord[2].1.x
-        let y3: Double = distance_coord[2].1.y
-        let z3: Double = distance_coord[2].1.z
+        let d3: Float = distance_coord[2].0
+        let x3: Float = distance_coord[2].1.x
+        let y3: Float = distance_coord[2].1.y
+        let z3: Float = distance_coord[2].1.z
         
         
         // First EQ
@@ -82,7 +83,7 @@ class Trilateration{
         
         let discriminant = pow(second, 2) - 4 * first * third
         
-        var z: Double = 0.0
+        var z: Float = 0.0
         
         if discriminant > 0 {
             if let value = self.solveQuadratic(a: first, b: second, c: third, discriminant: discriminant){
@@ -95,7 +96,7 @@ class Trilateration{
         return Coordinate(x: x, y: y, z: z)
     }
     
-    func solveQuadratic(a: Double, b: Double, c: Double, discriminant: Double) -> [Double]? {
+    private func solveQuadratic(a: Float, b: Float, c: Float, discriminant: Float) -> [Float]? {
         guard a != 0 else { return nil } // Not a quadratic
         guard discriminant >= 0 else { return nil } // No real roots
 

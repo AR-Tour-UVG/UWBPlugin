@@ -8,6 +8,6 @@ import Foundation
 
 
 struct Distances{
-    let distance: Double
+    let distance: Float
     let timestamp: TimeInterval
 }

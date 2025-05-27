@@ -6,7 +6,7 @@
 //
 
 struct Coordinate: Codable {
-    let x: Double
-    let y: Double
-    let z: Double
+    let x: Float
+    let y: Float
+    let z: Float
 }
