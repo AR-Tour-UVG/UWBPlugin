@@ -63,10 +63,21 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		E9A809A22DE6B89100AAA0C1 /* Exceptions for "UWBTestApp" folder in "Compile Sources" phase from "UWBplugin" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = E92337ED2DBEC7C100FE504E /* Sources */;
+			membershipExceptions = (
+				Maps/campusTest.json,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E90A662F2DC1F7220066DD8F /* UWBTestApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				E9A809A22DE6B89100AAA0C1 /* Exceptions for "UWBTestApp" folder in "Compile Sources" phase from "UWBplugin" target */,
 				E90A66512DC25F660066DD8F /* Exceptions for "UWBTestApp" folder in "UWBTestApp" target */,
 			);
 			path = UWBTestApp;
