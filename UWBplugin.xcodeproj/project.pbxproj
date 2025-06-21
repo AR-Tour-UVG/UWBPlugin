@@ -51,6 +51,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Maps/vrClassroom.json,
 			);
 			target = E90A662D2DC1F7220066DD8F /* UWBTestApp */;
 		};
@@ -64,6 +65,13 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		E94F16192DFA26DA00388D7E /* Exceptions for "UWBTestApp" folder in "Compile Sources" phase from "UWBTestApp" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = E90A662A2DC1F7220066DD8F /* Sources */;
+			membershipExceptions = (
+				Maps/vrClassroom.json,
+			);
+		};
 		E9A809A22DE6B89100AAA0C1 /* Exceptions for "UWBTestApp" folder in "Compile Sources" phase from "UWBplugin" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = E92337ED2DBEC7C100FE504E /* Sources */;
@@ -79,6 +87,7 @@
 			exceptions = (
 				E9A809A22DE6B89100AAA0C1 /* Exceptions for "UWBTestApp" folder in "Compile Sources" phase from "UWBplugin" target */,
 				E90A66512DC25F660066DD8F /* Exceptions for "UWBTestApp" folder in "UWBTestApp" target */,
+				E94F16192DFA26DA00388D7E /* Exceptions for "UWBTestApp" folder in "Compile Sources" phase from "UWBTestApp" target */,
 			);
 			path = UWBTestApp;
 			sourceTree = "<group>";

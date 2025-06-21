@@ -39,7 +39,7 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
     private var place_map: [String: Coordinate]
     
     override init() {
-        place_map = MapReader.readCoordinates(from: "casa.json")
+        place_map = MapReader.readCoordinates(from: "315b.json")
         self.trilateration = Trilateration(map: place_map)
     
         super.init()
@@ -82,21 +82,28 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
 // REQUIRED PROTOCOL
 extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
     func didUpdatePosition(for device: EstimoteUWBDevice) {
-        self.distances[device.publicIdentifier] = Distances(distance: device.distance, timestamp: Date().timeIntervalSince1970)
+        // we update the distance
+        self.distances[device.publicIdentifier] = Distances(distance: abs(device.distance), timestamp: Date().timeIntervalSince1970)
+        
+        // we get top 3 candidates for trilateration
         let top3 = self.trilateration.pickCoordinates(distances: self.distances)
         
         let coord: Coordinate
         if top3.count == 3{
             coord = self.trilateration.tirlaterate(top3Distances: top3)
+            print("Position: \(coord)")
+            print("Timestamp: \(Date().timeIntervalSince1970)")
+            
         }else{
-            coord = Coordinate(x: 0, y: 0, z: 0)
+            // print("Connected to: \(top3.count)")
         }
-        print("Estimated Position: \(coord)")
+        
+        
     }
     
     // OPTIONAL
     func didDiscover(device: UWBIdentifiable, with rssi: NSNumber, from manager: EstimoteUWBManager) {
-        print("Discovered: \(device)")
+        print("Discovered: \(device.publicIdentifier)")
         print(self.distances[device.publicIdentifier] == nil)
         
         // We can only connect to the sensor if it is on the place_map
@@ -104,8 +111,9 @@ extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
                 return 
         }
         
+        // if device is not on distnces dictionary AND the length of the dicrionary is less than the max connection number
         if self.distances[device.publicIdentifier] == nil && self.distances.count < self.connNumber {
-            self.distances[device.publicIdentifier] = Distances(distance: 0, timestamp: Date().timeIntervalSince1970)
+            // self.distances[device.publicIdentifier] = Distances(distance: 0, timestamp: Date().timeIntervalSince1970)
             self.uwbManager?.connect(to: device.publicIdentifier)
         }
     }
@@ -117,7 +125,9 @@ extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
     
     // OPTIONAL
     func didDisconnect(from device: UWBIdentifiable, error: Error?) {
-        self.distances[device.publicIdentifier] = nil
+        DispatchQueue.main.async {
+            self.distances[device.publicIdentifier] = nil
+        }
     }
     
     // OPTIONAL
