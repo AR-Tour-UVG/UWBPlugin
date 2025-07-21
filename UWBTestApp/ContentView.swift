@@ -6,6 +6,8 @@
 //
 import SwiftUI
 import EstimoteUWB
+import CoreMotion
+import os
 
 struct ContentView: View {
     @ObservedObject var uwb = EstimoteUWBManagerExample()
@@ -31,6 +33,9 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
     private var connNumber : Int = 5
     private var timeToLive: Double = 10.0
     
+    //motion manager
+    let motionManager = CMMotionManager()
+    let logger = Logger(subsystem: "com.yourcompany.yourapp", category: "debug")
     
     // class variables
     private var uwbManager: EstimoteUWBManager?
@@ -39,7 +44,7 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
     private var place_map: [String: Coordinate]
     
     override init() {
-        place_map = MapReader.readCoordinates(from: "315b.json")
+        place_map = MapReader.readCoordinates(from: "casa.json")
         self.trilateration = Trilateration(map: place_map)
     
         super.init()
@@ -59,6 +64,25 @@ class EstimoteUWBManagerExample: NSObject, ObservableObject {
                             self.uwbManager?.disconnect(from: deviceID)
                             self.distances.removeValue(forKey: deviceID)
                         }
+                    }
+                }
+                
+                if self.motionManager.isAccelerometerAvailable {
+                    self.motionManager.accelerometerUpdateInterval = 1.0 / 100.0 // Max typical
+
+                    self.motionManager.startDeviceMotionUpdates(to: .main) { (data, error) in
+                        guard let data = data, error == nil else { return }
+
+                        let timestamp = Date().timeIntervalSince1970
+                        let ax = data.userAcceleration.x
+                        let ay = data.userAcceleration.y
+                        let az = data.userAcceleration.z
+
+                        print("Time: \(timestamp), Accel: x:\(ax), y:\(ay), z:\(az)")
+                        self.logger.info("Time: \(timestamp), Accel: x:\(ax), y:\(ay), z:\(az)")
+
+                        // You can also append this to an array for later processing
+                        // or log to a file.
                     }
                 }
                 
@@ -91,8 +115,8 @@ extension EstimoteUWBManagerExample: EstimoteUWBManagerDelegate {
         let coord: Coordinate
         if top3.count == 3{
             coord = self.trilateration.tirlaterate(top3Distances: top3)
-            print("Position: \(coord)")
-            print("Timestamp: \(Date().timeIntervalSince1970)")
+            print("Timestamp: \(Date().timeIntervalSince1970), Position: \(coord)")
+            self.logger.info("Timestamp: \(Date().timeIntervalSince1970), Position: \(String(describing: coord))")
             
         }else{
             // print("Connected to: \(top3.count)")
