@@ -7,38 +7,42 @@
 import EstimoteUWB
 
 
-class UWBManager{
+class UWBManager: NSObject, ObservableObject{
     var delegate: UWBManagerDelegate
-    var manager: EstimoteUWBManager
+    var manager: EstimoteUWBManager? = nil
     var UWBQueue: OperationQueue
     
     init(delegate: UWBManagerDelegate, UWBQueue: OperationQueue){
         self.UWBQueue = UWBQueue
         self.delegate = delegate
+        
+        super.init()
+        
         self.manager = EstimoteUWBManager(delegate: self, options: EstimoteUWBOptions(shouldHandleConnectivity: false, isCameraAssisted: false))
+        
     }
     
     func connectTo(deviceID: String){
         UWBQueue.addOperation {
-            self.manager.connect(to: deviceID)
+            self.manager?.connect(to: deviceID)
         }
     }
     
     func disconnectFrom(deviceId: String){
         UWBQueue.addOperation{
-            self.manager.disconnect(from: deviceId)
+            self.manager?.disconnect(from: deviceId)
         }
     }
     
     func startScanning(){
         UWBQueue.addOperation {
-            self.manager.startScanning()
+            self.manager?.startScanning()
         }
     }
     
     func stopScanning(){
         UWBQueue.addOperation {
-            self.manager.stopScanning()
+            self.manager?.stopScanning()
         }
     }
 }
@@ -46,7 +50,7 @@ class UWBManager{
 extension UWBManager: EstimoteUWBManagerDelegate{
     func didUpdatePosition(for device: EstimoteUWBDevice){
         self.UWBQueue.addOperation {
-            self.delegate.didUpdatePosition(deviceId: device.publicIdentifier, distance: device.distance)
+            self.delegate.didUpdatePosition(deviceId: device.publicIdentifier, distance: Double(abs(device.distance))) // estimote sometimes returns negative distances so we pass it through the abs function
         }
     }
     

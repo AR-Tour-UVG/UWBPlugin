@@ -6,5 +6,5 @@
 //
 
 protocol AccelerometerDelegate{    
-    func onUpdate(vector: Vector3D)
+    func onUpdate(vector: Vector2D)
 }

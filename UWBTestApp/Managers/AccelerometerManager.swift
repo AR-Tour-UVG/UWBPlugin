@@ -32,9 +32,8 @@ extension AccelerometerManager{
 
             let x = data.acceleration.x
             let y = data.acceleration.y
-            let z = data.acceleration.z
             
-            let vector = Vector3D(x: x, y: y, z: z)
+            let vector = Vector2D(x: x, y: y)
             self.delegate?.onUpdate(vector: vector)
         }
     }
