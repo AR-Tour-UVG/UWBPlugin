@@ -124,6 +124,8 @@ extension PositionCoordinator: AccelerometerDelegate{
         
         KalmanFilter.shared.updateU(simd2d)
         KalmanFilter.shared.predict()
+        
+        lastTime = currentTime
     }
 }
     
