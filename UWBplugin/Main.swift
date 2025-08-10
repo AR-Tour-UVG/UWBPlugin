@@ -12,7 +12,7 @@ let viewModel = ViewModel()
 let positionCoordinator = viewModel.getPositionCoordinator()
 
 @_cdecl("getCoords")
-func getCoords() -> UnsafeMutablePointer<CChar> {
+public func getCoords() -> UnsafeMutablePointer<CChar> {
     var coords: [String: Any]  // Use 'Any' so we can put Double or nil
     
     if let position = positionCoordinator.getFilteredPosition() {
@@ -36,5 +36,12 @@ func getCoords() -> UnsafeMutablePointer<CChar> {
     } else {
         // Return an empty JSON object on error
         return strdup("{}")
+    }
+}
+
+@_cdecl("freeCString")
+public func freeCString(_ ptr: UnsafeMutablePointer<CChar>?) {
+    if let ptr = ptr {
+        free(ptr)
     }
 }

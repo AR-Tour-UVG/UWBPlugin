@@ -9,8 +9,8 @@ import Foundation
 
 
 func do_trilateration(anchors: [String: Anchor])->Vector2D{
-    var topThreeAnchors = pickTopThreeAnchors(anchors: anchors)
-    var position = tirlaterate_3D(anchors: topThreeAnchors)
+    let topThreeAnchors = pickTopThreeAnchors(anchors: anchors)
+    let position = tirlaterate_3D(anchors: topThreeAnchors)
     return position
 }
 

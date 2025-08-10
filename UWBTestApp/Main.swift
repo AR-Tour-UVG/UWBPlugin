@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct Main: App {
     init(){
-        let viewModel = ViewModel()
+        _ = ViewModel()
     }
     
     var body: some Scene {

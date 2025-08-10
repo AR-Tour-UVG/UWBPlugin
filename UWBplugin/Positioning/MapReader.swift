@@ -17,8 +17,9 @@ class MapReader {
         let name = String(fileComponents[0])
         let ext = String(fileComponents[1])
         
-        guard let fileURL = Bundle.main.url(forResource: name, withExtension: ext) else {
-            fatalError("File not found in bundle")
+        let bundle = Bundle(for: MapReader.self)
+        guard let fileURL = bundle.url(forResource: name, withExtension: ext) else {
+            fatalError("File not found in framework bundle")
         }
         
         do {
