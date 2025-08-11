@@ -11,10 +11,11 @@ import Foundation
 let viewModel = ViewModel()
 let positionCoordinator = viewModel.getPositionCoordinator()
 
+
 @_cdecl("getCoords")
 public func getCoords() -> UnsafeMutablePointer<CChar> {
     var coords: [String: Any]  // Use 'Any' so we can put Double or nil
-    
+        
     if let position = positionCoordinator.getFilteredPosition() {
         coords = [
             "x": position.x,

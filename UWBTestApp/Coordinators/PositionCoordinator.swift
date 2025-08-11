@@ -21,6 +21,7 @@ class PositionCoordinator{
     var accelerometerManager: AccelerometerManager?
     
     // Filtered Position
+    let lock = NSLock()
     var filteredPos: Vector2D? = nil
     
     
@@ -28,6 +29,22 @@ class PositionCoordinator{
         self.anchorsPositions = anchorsPositions
         self.connectionLimit = connectionLimit
         self.connectionTimeout = connectionTimeout
+    }
+    
+    public func getFilteredPos()->Vector2D?{
+        self.lock.lock()
+        let position = self.filteredPos
+        self.lock.unlock()
+        
+        return position
+    }
+    
+    public func getAnchors() -> [String: Anchor]{
+        self.lock.lock()
+        let anchors_ = self.anchors
+        self.lock.unlock()
+        
+        return anchors_
     }
     
     func getAnchor(deviceID: String, distance: Double) -> Anchor{

@@ -12,3 +12,5 @@ import _SwiftConcurrencyShims
 import simd
 @_cdecl("getCoords")
 public func getCoords() -> Swift.UnsafeMutablePointer<Swift.CChar>
+@_cdecl("freeCString")
+public func freeCString(_ ptr: Swift.UnsafeMutablePointer<Swift.CChar>?)

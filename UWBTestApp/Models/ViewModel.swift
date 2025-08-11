@@ -15,6 +15,7 @@ class ViewModel{
     var connectionTimout = 10.0
     
     var anchorMap: [String: Vector3D]
+    let posWrapper: PositionCoordinatorWrapper
     
     init(){
         // We first read the Campus Map
@@ -26,6 +27,9 @@ class ViewModel{
         queue.maxConcurrentOperationCount = 1
         
         let posCoordinator = PositionCoordinator(anchorsPositions: anchorMap, connectionLimit: connectionLimit, connectionTimeout: connectionTimout)
+        
+        // Create wrapper for UI binding
+        posWrapper = PositionCoordinatorWrapper(coordinator: posCoordinator)
         
         let accelerometerManager = AccelerometerManager(refreshRate: refreshRate, delegate: posCoordinator, accelerometerQueue: queue)
         let uwbManager = UWBManager(delegate: posCoordinator, UWBQueue: queue)

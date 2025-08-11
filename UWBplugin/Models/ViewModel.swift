@@ -18,6 +18,7 @@ class ViewModel{
     var anchorMap: [String: Vector3D]
     
     init(){
+        print("ViewModel init")
         // We first read the Campus Map
         self.anchorMap = MapReader.readCoordinates(from: mapURL)
         
@@ -30,8 +31,10 @@ class ViewModel{
         
         let accelerometerManager = AccelerometerManager(refreshRate: refreshRate, delegate: posCoordinator, accelerometerQueue: queue)
         let uwbManager = UWBManager(delegate: posCoordinator, UWBQueue: queue)
+        print("UWBplugin began scanning for sensors and listening for the accelerometer...")
         uwbManager.startScanning()
         accelerometerManager.startListening()
+        print("Scanning...")
         
         // IMPORTANT: add the delegates to the Position Coordinator
         posCoordinator.accelerometerManager = accelerometerManager
