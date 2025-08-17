@@ -31,4 +31,16 @@ class MapReader {
             fatalError("Failed to read or decode JSON: \(error)")
         }
     }
+    
+    static func readCoordinatesFromString(jsonMap: String) -> [String: Vector3D] {
+        do {
+            let data = Data(jsonMap.utf8)
+            let decoder = JSONDecoder()
+            let result = try decoder.decode([String: Vector3D].self, from: data)
+            return result
+        } catch {
+            fatalError("Failed to read or decode JSON: \(error)")
+        }
+    }
+    
 }

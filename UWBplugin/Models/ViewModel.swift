@@ -17,9 +17,9 @@ class ViewModel{
     
     var anchorMap: [String: Vector3D]
     
-    init(){
-        // We first read the Campus Map
-        self.anchorMap = MapReader.readCoordinates(from: mapURL)
+    init(anchorMap: [String: Vector3D]){
+        // The dictionary of Anchors is passed as a parameter
+        self.anchorMap = anchorMap
         
         //We initialize a single operation queue for the Accelerometer and UWB modules
         let queue = OperationQueue()

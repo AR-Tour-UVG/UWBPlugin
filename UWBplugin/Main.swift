@@ -8,14 +8,35 @@
 import Foundation
 
 
-let viewModel = ViewModel()
-let positionCoordinator = viewModel.getPositionCoordinator()
+var viewModel:ViewModel? = nil
+var positionCoordinator:PositionCoordinator? = nil
+var anchorMap: [String: Vector3D]? = nil
+
+
+@_cdecl("setAnchorMap")
+public func setAnchorMap(_ str: UnsafePointer<CChar>?) {
+    guard let str = str else {
+        fatalError("String parameter is nill")
+    }
+    let swiftString = String(cString: str)
+    let anchorMap_ = MapReader.readCoordinatesFromString(jsonMap: swiftString)
+    anchorMap = anchorMap_
+}
+
+@_cdecl("start")
+public func setAnchorMap() {
+    guard anchorMap != nil else{
+        fatalError("anchorMap is nill, make sure to assign a value via setAnchorMap function before.")
+    }
+    viewModel = ViewModel(anchorMap: anchorMap!)
+    positionCoordinator = viewModel?.getPositionCoordinator()
+}
 
 @_cdecl("getCoords")
 public func getCoords() -> UnsafeMutablePointer<CChar> {
     var coords: [String: Any]  // Use 'Any' so we can put Double or nil
     
-    if let position = positionCoordinator.getFilteredPosition() {
+    if let position = positionCoordinator?.getFilteredPosition() {
         coords = [
             "x": position.x,
             "y": position.y
